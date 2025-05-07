@@ -4,21 +4,30 @@ struct Deck {
     cards: Vec<String>
 }
 
-fn main() {
-    let suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
-    let values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
+// impl block is used to define methods for a struct,
+impl Deck {
 
-    let mut cards = vec![];
+    // new is a method that returns a new instance of the Deck struct
+    fn new() -> Self {  // without "$self", it is an associated function
+        let suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+        let values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
 
-    for suit in suits {
-        for value in values {
-            let card = format!("{} of {}", value, suit);
-            cards.push(card);
+        let mut cards = vec![];
+
+        for suit in suits {
+            for value in values {
+                let card = format!("{} of {}", value, suit);
+                cards.push(card);
+            }
         }
-    }
 
-    let deck: Deck = Deck { cards };
-    // let deck: Deck = Deck { cards: Vec::new() }; // same as above
+        let deck: Deck = Deck { cards };
+        return deck;
+    }
+}
+
+fn main() {
+    let deck = Deck::new();
 
     println!("Heres your deck: {:#?}", deck);
 }
