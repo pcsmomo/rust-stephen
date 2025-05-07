@@ -2,6 +2,12 @@
 
 Rust: The Complete Developer's Guide by Stephen Grider
 
+## Folder structure
+
+- 01-foundations
+  - section 1
+  - section 2
+
 ## Details
 
 <details open>
@@ -34,5 +40,12 @@ cd deck
 cargo run
 cargo run -q  # without debugging messages
 ```
+
+## Section 2: Core Concepts: The Building Blocks of Rust
+
+### 7. Representing Data with Structs
+
+- `struct` = class
+- `let` is not actually variable, but binding
 
 </details>
