@@ -105,7 +105,7 @@ fn main() {
 
 #### Ownership
 
-1. Every value is 'owned' by a single variable, struct, vector, etc at a time
+1. Every value is 'owned' by a **single variable**, struct, vector, etc at a time
 
 2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc, moves the value. The old variable can't be used anymore!
 
@@ -129,8 +129,15 @@ fn main() {
 
 10. References to a value can't outlive the value they refer to
 
+#### So
+
 11. These rules will dramatically change how you write code (compared to other languages)
 
 12. When in doubt, remember that Rust wants to minimize unexpected updates to data
+
+### 23. The Goal of Ownership and Borrowing
+
+- Lesson 1. make the engine read-only
+- Lesson 2. each objects has their own properties
 
 </details>
