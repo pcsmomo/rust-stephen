@@ -7,8 +7,10 @@ Rust: The Complete Developer's Guide by Stephen Grider
 - 01-foundations/deck
   - section 1
   - section 2
-- 03-rust-memory-system/bank
-  - section 3
+- 03-rust-memory-system
+  - bank
+    - section 3
+  - comparison-js-rust: comparing javascript and rust memory system
 
 ## Details
 
@@ -87,5 +89,48 @@ cd 03-rust-memory-system
 cargo new bank
 cd bank
 ```
+
+### 21. A Mysterious Error
+
+```rust
+fn main() {
+    let account = Account::new(1, String::from("Noah"));
+
+    print_account(account);
+    print_account(account); // it gets the mysterious error
+}
+```
+
+### 22. Unexpected Value Updates
+
+#### Ownership
+
+1. Every value is 'owned' by a single variable, struct, vector, etc at a time
+
+2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc, moves the value. The old variable can't be used anymore!
+
+#### Borrowing
+
+3. You can create many read-only references to a value that exist at the same time
+
+4. You can't move a value while a ref to the value exists
+
+5. You can make a writeable (mutable) reference to a value only if there are no read-only references currently in use. One mutable ref to a value can exist at a time
+
+6. You can't mutate a value through the owner when any ref (mutable or immutable) to the value exists
+
+7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
+
+#### Lifetimes
+
+8. When a variable goes out of scope, the value owned by it is dropped (cleaned up in memory)
+
+9. Values can't be dropped if there are still active references to it
+
+10. References to a value can't outlive the value they refer to
+
+11. These rules will dramatically change how you write code (compared to other languages)
+
+12. When in doubt, remember that Rust wants to minimize unexpected updates to data
 
 </details>
