@@ -46,6 +46,13 @@ cargo run -q  # without debugging messages
 ### 7. Representing Data with Structs
 
 - `struct` = class
-- `let` is not actually variable, but binding
+- `let` is not actually variable, but binding. Binding is immutable
+
+### 10. Mutable vs Immutable Bindings
+
+```rust
+// good debugging code with formatting
+println!("Heres your deck: {:#?}", deck);
+```
 
 </details>
