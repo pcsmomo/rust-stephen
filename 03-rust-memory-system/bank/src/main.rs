@@ -26,9 +26,13 @@ impl Bank {
     }
 }
 
-// fn print_account(account: Account) {
-//     println!("{:?}", account);
-// }
+fn print_account(account: Account) {
+    println!("{:#?}", account);
+}
+
+fn print_holder(holder: String) {
+    println!("{}", holder);
+}
 
 // fn main_error() {
 //     let account = Account::new(1, String::from("Noah"));
@@ -42,10 +46,18 @@ impl Bank {
 //     print_account(account); // error
 // }
 
+// fn main_error2() {
+//     let bank = Bank::new();
+
+//     let other_bank = bank;
+
+//     println!("{:?}", bank);
+// }
+
 fn main() {
-    let bank = Bank::new();
+    let account = Account::new(1, String::from("Noah"));
 
-    let other_bank = bank;
+    print_holder(account.holder);
 
-    println!("{:?}", other_bank);
+    print_account(account);
 }

@@ -107,7 +107,7 @@ fn main() {
 
 1. Every value is 'owned' by a **single variable**, struct, vector, etc at a time
 
-2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc, moves the value. The old variable can't be used anymore!
+2. Reassigning the value to another variable, passing it to a function, putting it into a vector, etc, **moves** the value. The old variable can't be used anymore!
 
 #### Borrowing
 
