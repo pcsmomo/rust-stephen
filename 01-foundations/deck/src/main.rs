@@ -21,8 +21,8 @@ impl Deck {
             }
         }
 
-        let deck: Deck = Deck { cards };
-        return deck;
+        // return Deck { cards };   // same as below
+        Deck { cards }
     }
 }
 
