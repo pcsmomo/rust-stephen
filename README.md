@@ -140,4 +140,8 @@ fn main() {
 - Lesson 1. make the engine read-only
 - Lesson 2. each objects has their own properties
 
+### 24. The Basics of Ownership
+
+> Above all, Rust wants to avoid 'unexpected updates'
+
 </details>
