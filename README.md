@@ -4,9 +4,11 @@ Rust: The Complete Developer's Guide by Stephen Grider
 
 ## Folder structure
 
-- 01-foundations
+- 01-foundations/deck
   - section 1
   - section 2
+- 03-rust-memory-system/bank
+  - section 3
 
 ## Details
 
@@ -73,6 +75,17 @@ println!("Heres your deck: {:#?}", deck);
 ```sh
 # 01-foundations/deck
 cargo add rand
+```
+
+## Section 3: Ownership and Borrowing: Rust's Unique Memory System
+
+### 19. Project Overview
+
+```sh
+mkdir 03-rust-memory-system
+cd 03-rust-memory-system
+cargo new bank
+cd bank
 ```
 
 </details>
