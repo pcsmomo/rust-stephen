@@ -55,4 +55,24 @@ cargo run -q  # without debugging messages
 println!("Heres your deck: {:#?}", deck);
 ```
 
+### 13. Installing External Crates
+
+- `crate` = package
+
+#### Rust Standard Library
+
+- Included with every project without any additional install
+- Docs at `https://doc.rust-lang.org/stable/std/`
+
+#### External Crates
+
+- Have to be install into our project with `cargo add <crate name>`
+- Crate listing at `https://crates.io/`
+- Docs also at `https://docs.rs/`
+
+```sh
+# 01-foundations/deck
+cargo add rand
+```
+
 </details>
