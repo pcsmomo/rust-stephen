@@ -133,7 +133,7 @@ fn main() {
 
 11. These rules will dramatically change how you write code (compared to other languages)
 
-12. When in doubt, remember that Rust wants to minimize unexpected updates to data
+**12. When in doubt, remember that Rust wants to minimize unexpected updates to data**
 
 ### 23. The Goal of Ownership and Borrowing
 

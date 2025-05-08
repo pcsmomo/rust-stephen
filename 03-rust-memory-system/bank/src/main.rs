@@ -54,14 +54,18 @@ fn print_holder(holder: String) {
 //     println!("{:?}", bank);
 // }
 
+fn change_account(account: &mut Account) {
+    account.balance = 10;
+}
+
 fn main() {
-    let account = Account::new(1, String::from("Noah"));
+    let mut account = Account::new(1, String::from("Noah"));
 
-    let account_ref = &account;
-    let account_ref2 = &account;
+    let account_ref = &mut account;
 
-    print_account(account_ref);
-    print_account(account_ref2);
+    account.balance = 100;
+
+    change_account(account_ref);
 
     println!("{:#?}", account);
 }
