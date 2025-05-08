@@ -30,11 +30,16 @@ fn print_bank(bank: Bank) {
     println!("{:#?}", bank);
 }
 
+fn print_accounts(accounts: Vec<Account>) {
+    println!("{:#?}", accounts);
+}
+
 fn main() {
     let bank = Bank::new();
 
     // TODO: Write and call a function that will *take ownership* of
     // the Banks's "accounts" field, print it, and return nothing
+    print_accounts(bank.accounts);
 
     // Once you've finished the to-do, uncomment the 'print_bank' call below
     // When your function + print_bank run, do you think you'll end up getting
@@ -42,5 +47,5 @@ fn main() {
     // If so, what error do you think you'd see?
 
     // UNCOMMENT THIS:
-    // print_bank(bank);
+    print_bank(bank);
 }
