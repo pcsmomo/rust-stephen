@@ -15,11 +15,16 @@ impl Account {
     }
 }
 
+fn print_account(account: Account) {
+    println!("{:#?}", account);
+}
+
 fn main() {
     let account = Account::new(1, String::from("me"));
 
     // TODO: Write and call a function that will *take ownership* of the Account
     // value, print it, and return nothing
+    print_account(account);
 
     // Question: Will you be able to call the function twice with the 'account'
     // variable?
