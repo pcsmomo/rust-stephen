@@ -26,15 +26,10 @@ impl Bank {
     }
 }
 
-fn make_and_print_account() -> &Account {
-    let account = Account::new(1, String::from("Noah"));
-
-    println!("{:#?}", account);
-
-    &account
-}
-
 fn main() {
-    let account_ref = make_and_print_account();
-    println!("{:#?}", account_ref);
+    let num = 5;
+
+    let other_num = num;
+
+    println!("{} {}", num, other_num);
 }
