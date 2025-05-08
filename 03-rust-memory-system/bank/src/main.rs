@@ -58,8 +58,10 @@ fn main() {
     let account = Account::new(1, String::from("Noah"));
 
     let account_ref = &account;
+    let account_ref2 = &account;
 
     print_account(account_ref);
+    print_account(account_ref2);
 
     println!("{:#?}", account);
 }
