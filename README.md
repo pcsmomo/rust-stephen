@@ -119,7 +119,7 @@ fn main() {
 
 6. You can't mutate a value through the owner when any ref (mutable or immutable) to the value exists
 
-7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements)
+7. Some types of values are copied instead of moved (numbers, bools, chars, arrays/tuples with copyable elements) - **break rules of ownership (=it works as similar as usual programming languages)**
 
 #### Lifetimes
 
