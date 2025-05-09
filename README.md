@@ -5,12 +5,13 @@ Rust: The Complete Developer's Guide by Stephen Grider
 ## Folder structure
 
 - 01-foundations/deck
-  - section 1
-  - section 2
+  - section 1 and 2
 - 03-rust-memory-system
   - bank
-    - section 3
+    - section 3 and 4
   - comparison-js-rust: comparing javascript and rust memory system
+- 05-enums
+  - media
 
 ## Details
 
@@ -143,5 +144,16 @@ fn main() {
 ### 24. The Basics of Ownership
 
 > Above all, Rust wants to avoid 'unexpected updates'
+
+## Section 5: Enums Unleashed: Pattern Matching and Options
+
+### 45. Project Overview
+
+```sh
+mkdir 05-enums
+cd 05-enums
+cargo new media
+cd media
+```
 
 </details>
