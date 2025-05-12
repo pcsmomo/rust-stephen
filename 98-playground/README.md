@@ -44,3 +44,33 @@ wasm-pack build --target web
 ```sh
 pnpm create vite@latest rust-wasm-react -- --template react-ts
 ```
+
+### Install wasm-pack Output
+
+Copy the contents of the `pkg` directory from `your Rust project` to your `React project`'s `src` directory. Then, install the package:
+
+```sh
+pnpm install ./src/pkg
+```
+
+### Use it in the app
+
+```jsx
+import { useEffect, useState } from "react";
+
+import init, { greet } from "./pkg/rust_wasm";
+
+function App() {
+  const [greeting, setGreeting] = useState("");
+
+  useEffect(() => {
+    init().then(() => {
+      setGreeting(greet("Noah!"));
+    });
+  }, []);
+
+  return <div>{greeting}</div>;
+}
+
+export default App;
+```
