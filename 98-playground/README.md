@@ -24,6 +24,19 @@ cargo new --lib rust-wasm
 cd rust-wasm
 ```
 
+### Work on the project
+
+### Build the rust project
+
+```sh
+wasm-pack build --target web
+
+# [INFO]: Optimizing wasm binaries with `wasm-opt`...
+# [INFO]: Optional fields missing from Cargo.toml: 'description', 'repository', and 'license'. These are not necessary, but recommended
+# [INFO]: ✨   Done in 41.58s
+# [INFO]: 📦   Your wasm pkg is ready to publish at ~/rust-stephen/rust-stephen-git/98-playground/rust-wasm/pkg.
+```
+
 ## React Side
 
 ### Create a react project with Vite
