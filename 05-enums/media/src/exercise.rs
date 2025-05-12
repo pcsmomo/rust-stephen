@@ -14,7 +14,17 @@ struct Account {
 }
 
 fn main() {
-    let accounts: Vec<Account> = vec![Account { balance: 0 }, Account { balance: 10 }];
+    let mut accounts: Vec<Account> = vec![
+        // Account { balance: 0 },
+        // Account { balance: 10 },
+    ];
 
     // Add code here:
+    match accounts.first_mut() {
+        Some(account) => {
+            account.balance = 30;
+            println!("{:#?}", account);
+        }
+        None => println!("No account found"),
+    }
 }
