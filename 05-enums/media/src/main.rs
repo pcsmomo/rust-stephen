@@ -54,20 +54,15 @@ impl Catalog {
         self.items.push(media);
     }
 
-    fn get_by_index(&self, index: usize) -> MightHaveAValue {
+    fn get_by_index(&self, index: usize) -> Option<&Media> {
         if self.items.len() > index {
             // Good! We have somethingg to return
-            MightHaveAValue::ThereIsAValue(&self.items[index])
+            Some(&self.items[index])
         } else {
             // Bad! We don't have anything to return!!
-            MightHaveAValue::NoValueAvailable
+            None
         }
     }
-}
-
-enum MightHaveAValue<'a> {
-    ThereIsAValue(&'a Media),
-    NoValueAvailable,
 }
 
 fn print_media(media: Media) {
@@ -96,26 +91,11 @@ fn main() {
     catalog.add(good_movie);
     catalog.add(bad_book);
     catalog.add(podcast);
-    catalog.add(placeholder);
+    // catalog.add(placeholder);
 
-    // let item = catalog.get_by_index(40);
+    let item = catalog.get_by_index(40);
 
-    // println!("{:#?}", item)
-
-    // Using `match`
-    match catalog.get_by_index(99) {
-        MightHaveAValue::ThereIsAValue(media) => {
-            println!("{:#?}", media);
-        }
-        MightHaveAValue::NoValueAvailable => {
-            println!("No value available");
-        }
-    }
-
-    // Using `if let`
-    // if let MightHaveAValue::ThereIsAValue(media) = catalog.get_by_index(99) {
-    //     println!("{:#?}", media);
-    // } else {
-    //     println!("No value available");
-    // }
+    // println!("{:#?}", item.unwrap());
+    // println!("{:#?}", item.expect("expected there to be an item here"));
+    println!("{:#?}", item.unwrap_or(&placeholder));
 }
