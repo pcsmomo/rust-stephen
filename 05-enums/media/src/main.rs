@@ -83,5 +83,15 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    println!("{:#?}", catalog);
+    // returns an `Option`
+    // println!("{:#?}", catalog.items.get(0));
+
+    match catalog.items.get(100) {
+        Some(value) => {
+            println!("Item: {:#?}", value);
+        }
+        None => {
+            println!("No item found");
+        }
+    }
 }

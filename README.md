@@ -156,4 +156,21 @@ cargo new media
 cd media
 ```
 
+### 53. The Option Enum
+
+- Rust doesn't have `null`, `nil`, or `undefined`
+- Instead, we get a built-in enum called `Option`
+- Has two variants - `Some` and `None`
+- if you want to work with `Option` you have to use \
+  pattern matching (the `if let` thing) or a match statement
+- Forces you to handle the case in which you have a value\
+  and the case in which you don't
+
+```rust
+enum Option {
+    Some(u32),
+    None,
+}
+```
+
 </details>
