@@ -332,4 +332,14 @@ let vec_of_numbers = vec![
     let portion_ref = &portion;
     ```
 
+### 75. When to Use Which String
+
+Summary
+
+| Name      | When to use                                                                                        | Use memory in... | Notes                                                                   |
+|:---------:|:--------------------------------------------------------------------------------------------------:|:----------------:|:-----------------------------------------------------------------------:|
+| `String`  | When you want to take ownership of text data.<br> When you have a string that might grow or shrink | Stack and Heap   |                                                                         |
+| `&String` | Usually never                                                                                      | Stack            | Rust automatically turns `String` into a `&str` for you                 |
+| `&str`    | When you want to read all or a portion of some text owned by something else                        | Stack            | Refers directly to heap-allocated or data-allocated text                |
+
 </details>
