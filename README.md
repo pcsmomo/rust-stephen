@@ -372,4 +372,15 @@ fn main() -> Result<(), Error> {
 }
 ```
 
+### 82. When to Use Each Technique
+
+1. Use a `match` or `if let` statement
+   - When you're ready to meaningfully deal with an error
+   - [example.rs](./07-errors-results/logs/lectures/82-1-match.rs)
+2. Call `unwrap()` or `expect("why this paniced")` on the Result
+   - Quick debugging, or if you wawnt to crash on an Err()
+3. Use the try operator(`?`) to unwrap or propagate the Result
+   - When you don't have any way to handle the error in the current function
+   - [example.rs](./07-errors-results/logs/lectures/82-3-try-operator.rs)
+
 </details>
