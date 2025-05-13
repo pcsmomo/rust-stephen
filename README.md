@@ -342,4 +342,24 @@ Summary
 | `&String` | Usually never                                                                                      | Stack            | Rust automatically turns `String` into a `&str` for you                 |
 | `&str`    | When you want to read all or a portion of some text owned by something else                        | Stack            | Refers directly to heap-allocated or data-allocated text                |
 
+### 77. Understanding the Issue
+
+```py
+text = "how are you"
+word_list = text.split(" ")
+# stores "how" , "are", "you"
+```
+
+```rust
+let text = "how are you"
+let split_text = text.split(" ");
+// stores &str, &str, &str
+```
+
+#### Lifetime error
+
+```rust
+`text_that_was_read` does not live long enough
+```
+
 </details>
