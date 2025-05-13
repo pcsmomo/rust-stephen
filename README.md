@@ -246,4 +246,11 @@ enum Result <T, E> {
 }
 ```
 
+### 68. Empty OK Variants
+
+```rust
+// empty tuple
+Ok(())
+```
+
 </details>
