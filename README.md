@@ -362,4 +362,14 @@ let split_text = text.split(" ");
 `text_that_was_read` does not live long enough
 ```
 
+### 81. The Try Operator
+
+- `?`: [Try Operator](https://doc.rust-lang.org/rust-by-example/std/result/question_mark.html)
+
+```rust
+fn main() -> Result<(), Error> {
+  let text = fs::read_to_string("logs.txt")?;
+}
+```
+
 </details>
