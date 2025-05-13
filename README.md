@@ -253,4 +253,33 @@ enum Result <T, E> {
 Ok(())
 ```
 
+### 73. The Stack and Heap
+
+- Stack
+  - Fast, but limited size (2-8MB)
+- Heap
+  - Slow, but can grow to store a lot of data
+- Data: (called Data Segment or Rodata Secment or Static Segment)
+  - Stores literal values that we write into our code
+
+#### Super Common Pattern
+
+- `Stack` stores metadata about a datastructure
+- `Heap` stores the actual data
+- Avoids running out of memory in the stack if the datastructure grows to hold a lot of data
+
+```rust
+let nums = vec![1, 2, 3, 4, 5]
+```
+
+#### Corner Case
+
+- If a data structure owns another data structure, the child's metadata will be placed on the heap
+
+```rust
+let vec_of_numbers = vec![
+  vec![1, 2, 3, 4, 5]
+]
+```
+
 </details>
