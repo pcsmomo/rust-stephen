@@ -22,6 +22,13 @@ fn main() {
             // let local_error_logs = extract_error(text_that_was_read.as_str());
             // println!("{:#?}", local_error_logs);
             error_logs = extract_error(text_that_was_read.as_str());
+
+            match fs::write("errors.txt", error_logs.join("\n")) {
+                Ok(_) => println!("Wrote errors.txt"),
+                Err(why_this_failed) => {
+                    panic!("Failed to write to file: {}", why_this_failed);
+                }
+            }
         }
         Err(why_this_failed) => {
             panic!("Failed to read file: {}", why_this_failed);
