@@ -12,6 +12,7 @@ Rust: The Complete Developer's Guide by Stephen Grider
   - comparison-js-rust: comparing javascript and rust memory system
 - 05-enums
   - media
+    - section 5 and 6
 
 ## Details
 
