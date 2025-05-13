@@ -187,4 +187,22 @@ enum Option {
 
 [Rust Options](https://doc.rust-lang.org/std/option/)
 
+## Section 6: Project Architecture: Mastering Modules in Rust
+
+### 59. Modules Overview
+
+#### Option 1: Create a mod in an existing file
+
+- most appropriate when you have a really large file with a lot of stuff going on
+
+#### Option 2: Create a module in a new single file in the same folder
+
+- Most appropriate when you want to separate module to organise code,\
+  but it doesn't need to span several files
+
+#### Option 3: Spread code out among several separate files in a new folder
+
+- most appropriate when you have a large module
+- Has a couple of confusing parts
+
 </details>
