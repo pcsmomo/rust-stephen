@@ -226,4 +226,13 @@ cargo new logs
 cd logs
 ```
 
+### 64. The Result Enum
+
+```rust
+enum Result {
+    Ok(value),
+    Err(error)
+}
+```
+
 </details>
