@@ -282,4 +282,54 @@ let vec_of_numbers = vec![
 ]
 ```
 
+### 74. Strings, String Refs, and String Slices
+
+- `String`
+  - Use anytime we want ownership of text
+  - Use anytime we want text that can grow or shrink
+- `&String`: String reference
+  - Rarely used!
+  - Rust will automatically turn `&String` into `&str` for you
+- `&str`: String slice
+  - Use anytime you don't want to take ownership of text
+  - Use anytime you want to refer to a `portion` of a string owned by something else
+
+  ```rust
+  let color = String::from("red");
+  let c = color.as_str();
+  ```
+
+  - Reason #1: `&str` lets you refer to text in the `data segment` without a `heap` allocation
+    - case 1:
+
+      - slightly better performance.
+
+      ```rust
+      let color = "red";
+      ```
+
+    - case 2: `"String::from("red").as_str()`
+
+      ```rust
+      let color = String::from("red");
+      let color_ref = &color;
+      ```
+
+  - Reason #2: `&str` lets you `slice` (take a portion) of text that is already on the heap
+
+    ```rust
+    let color = String::from("blue");
+    let portion = &color[1..4]; // "lue"
+    ```
+
+    - without `&str`: there are extra allocations involved. (not good in performance)
+
+    ```rust
+    let color = String::from("blue");
+    let portion = String::from(
+      color.chars().skip(1).collect::<String>();
+    );
+    let portion_ref = &portion;
+    ```
+
 </details>
