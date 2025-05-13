@@ -11,7 +11,6 @@ enum Detector {
     Blackfly {
         acquire_time: f32,
     },
-    Dummy,
 }
 
 impl Detector {
@@ -37,9 +36,6 @@ impl Detector {
             }
             Detector::Blackfly { acquire_time } => {
                 format!("Blackfly - acquire_time: {}", acquire_time)
-            }
-            Detector::Dummy => {
-                format!("Dummy")
             }
             _ => {
                 format!("Unknown detector")
@@ -91,24 +87,9 @@ fn main() {
     //     println!("{}", detector.description());
     // }
 
-    // use if let
-    // if let Some(detector) = detector_pool.get_by_index(10) {
-    //     println!("{}", detector.description());
-    // } else {
-    //     panic!("at the disco");
-    // }
-
-    // use match
-    match detector_pool.get_by_index(10) {
-        Some(detector) => println!("{}", detector.description()),
-        None => panic!("at the disco!"),
+    if let Some(detector) = detector_pool.get_by_index(1) {
+        println!("{}", detector.description());
+    } else {
+        println!("Detector not found");
     }
-
-    let dummy = Detector::Dummy;
-    // println!("{:#?}", detector_pool.get_by_index(10).unwrap());
-    // println!(
-    //     "{:#?}",
-    //     detector_pool.get_by_index(10).expect("Detector not found")
-    // );
-    println!("{:#?}", detector_pool.get_by_index(10).unwrap_or(&dummy));
 }
