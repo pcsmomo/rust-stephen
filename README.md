@@ -235,4 +235,15 @@ enum Result {
 }
 ```
 
+### 65. The Result Enum in Action (Generic)
+
+```rust
+fn device(a: f64, b: f64) -> Result<f64, Error>
+
+enum Result <T, E> {
+    Ok(T),
+    Err(E)
+}
+```
+
 </details>
