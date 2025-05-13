@@ -13,6 +13,9 @@ Rust: The Complete Developer's Guide by Stephen Grider
 - 05-enums
   - media
     - section 5 and 6
+- 07-errors-results
+  - logs
+    - section 7
 
 ## Details
 
@@ -211,5 +214,16 @@ enum Option {
 - `pub`: export
 - `mod`: import
 - `super`: parent
+
+## Section 7: Handling the Unexpected: Errors and Results  
+
+### 62. Project Overview
+
+```sh
+mkdir 07-errors-results
+cd 07-errors-results
+cargo new logs
+cd logs
+```
 
 </details>
