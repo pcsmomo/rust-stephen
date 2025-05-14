@@ -10,15 +10,12 @@ Rust: The Complete Developer's Guide by Stephen Grider
   - bank
     - section 3 and 4
   - comparison-js-rust: comparing javascript and rust memory system
-- 05-enums
-  - media
-    - section 5 and 6
-- 07-errors-results
-  - logs
-    - section 7
-- 08-iterator
-  - iter
-    - section 8
+- 05-enums/media
+  - section 5 and 6
+- 07-errors-results/logs
+- 08-iterator/iter
+- 09-lifetimes/lifetimes
+- 10-generics-traits/generics
 
 ## Details
 
@@ -565,5 +562,20 @@ You can omit annotations in two scenarios.
      }
    }
    ```
+
+## Section 10: Generics and Traits: Writing Flexible, Reusable Code
+
+### 109. Project Setup
+
+```sh
+mkdir 10-generics-traits
+cd 10-generics-traits
+cargo new generics
+cd generics
+```
+
+```sh
+cargo add num-traits
+```
 
 </details>
