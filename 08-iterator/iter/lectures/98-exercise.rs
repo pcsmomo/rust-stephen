@@ -11,7 +11,10 @@ fn main() {
     // many kinds of data structures. We have to explicitly
     // tell collect what kind of structure we want by adding a
     // type annotation
-    let balances = accounts.iter().map(|account| account.balance).collect();
+    let balances = accounts
+        .iter()
+        .map(|account| account.balance)
+        .collect::<Vec<_>>();
 
     println!("Balances: {:#?}", balances);
 }
