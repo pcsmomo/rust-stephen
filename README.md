@@ -16,6 +16,9 @@ Rust: The Complete Developer's Guide by Stephen Grider
 - 07-errors-results
   - logs
     - section 7
+- 08-iterator
+  - iter
+    - section 8
 
 ## Details
 
