@@ -394,11 +394,14 @@ cargo new iter
 cd iter
 ```
 
-|   |   |   |   |
-|---|---|---|---|
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
+|       Name        | Description                                                            |
+| :---------------: | ---------------------------------------------------------------------- |
+| shorten_strings() | [90-iter_mut.rs](./08-iterator/iter/lectures/90-iter_mut.rs)           |
+|  move_elements()  | [94-into_iter.rs](./08-iterator/iter/lectures/94-into_iter.rs)         |
+|  print_element()  | [88-vector-slices.rs](./08-iterator/iter/lectures/88-vector-slices.rs) |
+|  to_uppercase()   | [92-collect.rs](./08-iterator/iter/lectures/92-collect.rs)             |
+|     explode()     | [95-inner-maps.rs](./08-iterator/iter/lectures/95-inner-maps.rs)       |
+|  find_color_or()  | [97-find-map_or.rs](./08-iterator/iter/lectures/97-find-map_or.rs)     |
 
 ### 86. Iterator Consumers
 

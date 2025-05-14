@@ -30,7 +30,12 @@ fn explode(elements: &[String]) -> Vec<Vec<String>> {
         .collect::<Vec<_>>()
 }
 
-fn find_color_or(elements: &[String], search: &str, fallback: &str) -> String {}
+fn find_color_or(elements: &[String], search: &str, fallback: &str) -> String {
+    elements
+        .iter()
+        .find(|el| el.contains(search))
+        .map_or(String::from(fallback), |el| el.to_string())
+}
 
 fn main() {
     let colors = vec![
@@ -51,6 +56,9 @@ fn main() {
     // move_elements(colors, &mut destination);
     // println!("{:#?}", destination);
 
-    let exploded = explode(&colors);
-    println!("{:#?}", exploded);
+    // let exploded = explode(&colors);
+    // println!("{:#?}", exploded);
+
+    let found_color = find_color_or(&colors, "re", "orange");
+    println!("{}", found_color);
 }
