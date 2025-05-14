@@ -581,4 +581,52 @@ cd generics
 cargo add num-traits
 ```
 
+### 112. Trait Bounds
+
+A trait is a set of methods
+
+- it can contain **abstract methods** which don't have an implementation
+- it can contain **default methods**, which have an implementation
+
+```rust
+trait Vehicle {
+  fn start(&self);
+
+  fn stop(&self) {
+    println!("Stopped");
+  }
+}
+```
+
+A struct/enum/primitive can **implement** a trait
+
+- The implementor has to provide an implementation for all of the **abstract methods**
+- The implmentor can **optionally** override the default methods
+
+```rust
+struct Car {};
+
+impl Vehicle for Car {
+  fn start(&self) {
+    println!("Start!!!");
+  }
+}
+```
+
+Type `T` must be something that implements the Vehicle trait
+
+```rust
+fn start_and_stop<T: Vehicle>(vehicle: T) {
+  vehicle.start();
+
+  vehicle.stop();
+}
+
+fn main() {
+  let car = Car {};
+
+  start_and_stop(car);
+}
+```
+
 </details>
