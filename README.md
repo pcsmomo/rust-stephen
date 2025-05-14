@@ -523,4 +523,20 @@ fn longest<'a>(str_a: &'a str, str_b: &'a str) -> &'a str {
 }
 ```
 
+### 105. What Lifetime Annotation Are All About
+
+- when there are more than two ref arguments, Rust will assume the return would be one of the arguments
+- Rust will not analyse the body of your function to figure out whether the return ref is pointing at the first or second arg
+
+```rust
+fn next_language(languages: &[String], current: &str) -> &str {}
+```
+
+- To clarify which ref the return ref is pointing at, we have to add lifetime annotations
+  - `a` in `'a` is just a identifier, so it can be `'LifetimeAnnotation`, but in developer convention, it usually be `'a`
+
+```rust
+fn next_language<'a>(languages: &'a [String], current: &str) -> &'a str {}
+```
+
 </details>
