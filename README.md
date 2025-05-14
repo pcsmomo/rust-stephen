@@ -539,4 +539,31 @@ fn next_language(languages: &[String], current: &str) -> &str {}
 fn next_language<'a>(languages: &'a [String], current: &str) -> &'a str {}
 ```
 
+### 107. Lifetime Elision
+
+You can omit annotations in two scenarios.
+
+1. Function that takes one ref + any number of values + return a ref
+
+   ```rust
+   fn last_language(languages: &[String]) -> &str
+   fn generate(set: &[i32], range: i32) -> &str
+   fn leave(message: &Message, text: String) -> &str
+   ```
+
+2. Method that takes `&self` and any number of other refs + returns a ref.
+**Rust assumes the returned ref will point at `&self`**
+
+   ```rust
+   struct Bank { 
+     name: String
+   }
+
+   impl Bank {
+     fn get_name(&self, default_name: &str) -> &str {
+       &self.name
+     }
+   }
+   ```
+
 </details>
