@@ -525,7 +525,7 @@ fn longest<'a>(str_a: &'a str, str_b: &'a str) -> &'a str {
 
 ### 105. What Lifetime Annotation Are All About
 
-- when there are more than two ref arguments, Rust will assume the return would be one of the arguments
+- when there are **more than two ref arguments**, Rust will assume the return would be one of the arguments
 - Rust will not analyse the body of your function to figure out whether the return ref is pointing at the first or second arg
 
 ```rust
