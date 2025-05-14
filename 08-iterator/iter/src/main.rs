@@ -13,7 +13,10 @@ fn shorten_strings(elements: &mut [String]) {
 }
 
 fn to_uppercase(elements: &[String]) -> Vec<String> {
-    elements.iter().map(|el| el.to_uppercase()).collect()
+    elements
+        .iter()
+        .map(|el| el.to_uppercase())
+        .collect::<Vec<_>>()
 }
 
 fn main() {

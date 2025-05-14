@@ -439,4 +439,45 @@ fn main() {
 - `iter_mut()`: **mutable reference**
 - `into_iter()`: **ownership**, unless called on a mutable ref to a vector
 
+### 93. How Collect Works
+
+- collect decides the return type automatically following examples
+
+```rust
+// 1. collect() will follow the return type of this function
+fn to_uppercase(elements: &[String]) -> Vec<String> {
+    elements.iter().map(|el| el.to_uppercase()).collect()
+}
+
+// 2. collect() will follow the type specified for uppercased
+fn to_uppercase(elements: &[String]) -> Vec<String> {
+    let uppercased: Vec<String> = elements.iter().map(|el| el.to_uppercase()).collect();
+    uppercased
+}
+
+// 3. Turbofish, and Stephen's preferred way. it's obvious next to collect()
+fn to_uppercase(elements: &[String]) -> Vec<String> {
+    elements
+        .iter()
+        .map(|el| el.to_uppercase())
+        .collect::<Vec<String>>()
+}
+```
+
+`Vec<String>` can be used like `Vec<_>` as `collect()` knows the the return type in the previous chain
+
+```rust
+fn to_uppercase(elements: &[String]) -> Vec<String> {
+    let uppercased: Vec<_> = elements.iter().map(|el| el.to_uppercase()).collect();
+    uppercased
+}
+
+fn to_uppercase(elements: &[String]) -> Vec<String> {
+    elements
+        .iter()
+        .map(|el| el.to_uppercase())
+        .collect::<Vec<_>>()
+}
+```
+
 </details>
