@@ -492,4 +492,35 @@ fn to_uppercase(elements: &[String]) -> Vec<String> {
 }
 ```
 
+## Section 9: Advanced Lifetimes: Mastering Rust's Memory Model
+
+### 102. Lifetime Annotations
+
+```sh
+mkdir 09-lifetimes
+cd 09-lifetimes
+cargo new lifetimes
+cd lifetimes
+```
+
+```rust
+struct Account {
+  balance: i32
+}
+
+struct Bank<'a> {
+  primary_account: &'a Account
+}
+```
+
+```rust
+fn longest<'a>(str_a: &'a str, str_b: &'a str) -> &'a str {
+  if str_a.len() > str_b.len() {
+    str_a
+  } else {
+    str_b
+  }
+}
+```
+
 </details>
