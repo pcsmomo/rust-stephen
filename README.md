@@ -394,6 +394,12 @@ cargo new iter
 cd iter
 ```
 
+|   |   |   |   |
+|---|---|---|---|
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+
 ### 86. Iterator Consumers
 
 iterator is lazy. Nothing happens until...
