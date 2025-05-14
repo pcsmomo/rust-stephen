@@ -383,4 +383,15 @@ fn main() -> Result<(), Error> {
    - When you don't have any way to handle the error in the current function
    - [example.rs](./07-errors-results/logs/lectures/82-3-try-operator.rs)
 
+## Section 8: Iterator Deep Dive: Efficient Data Processing
+
+### 83. Project Overview
+
+```sh
+mkdir 08-iterator
+cd 08-iterator
+cargo new iter
+cd iter
+```
+
 </details>
