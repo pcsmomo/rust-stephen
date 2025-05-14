@@ -433,4 +433,10 @@ fn main() {
 }
 ```
 
+### 90. Iterators with Mutable Refs
+
+- `iter`: **read-only reference**
+- `iter_mut()`: **mutable reference**
+- `into_iter()`: **ownership**, unless called on a mutable ref to a vector
+
 </details>
