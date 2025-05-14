@@ -398,14 +398,14 @@ cd iter
 
 iterator is lazy. Nothing happens until...
 
-- A) You call `next`
-- B) You use a function that called `next` automatically
-  - `iterator consumers` such as `for_each` etc
+- A) You call `next()`
+- B) You use a function that called `next()` automatically
+  - `iterator consumers` such as `for_each()`, `collect()`,  etc
 
 ### 87. Iterator Adaptors
 
-However, `map` is not consumer but `iterator adaptor`\
-and it doesn't call `next` automatically
+However, `map()` is not consumer but `iterator adaptor`\
+and it doesn't call `next()` automatically
 
 ```rust
 elements.iter().map(|el| format!("{} {}", el, el)); // error
