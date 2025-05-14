@@ -15,7 +15,11 @@ Rust: The Complete Developer's Guide by Stephen Grider
 - 07-errors-results/logs
 - 08-iterator/iter
 - 09-lifetimes/lifetimes
-- 10-generics-traits/generics
+- 10-generics-traits
+  - generics
+    - first part of section 10
+  - traits
+    - second part of section 10
 
 ## Details
 
@@ -627,6 +631,13 @@ fn main() {
 
   start_and_stop(car);
 }
+```
+
+### 114. Super Solve Flexibility
+
+```sh
+cargo new traits
+cd traits
 ```
 
 </details>
