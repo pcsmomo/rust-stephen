@@ -18,6 +18,14 @@ fn last_language(languages: &[String]) -> &str {
     languages.last().unwrap()
 }
 
+fn longest_language<'a>(lang_a: &'a str, lang_b: &'a str) -> &'a str {
+    if lang_a.len() > lang_b.len() {
+        lang_a
+    } else {
+        lang_b
+    }
+}
+
 fn main() {
     let languages = vec![
         String::from("rust"),
@@ -29,8 +37,11 @@ fn main() {
     let current = "rust";
     let next = next_language(&languages, current);
 
-    println!("{}", next);
+    println!("next language: {}", next);
 
     let last = last_language(&languages);
-    println!("{}", last);
+    println!("last language: {}", last);
+
+    let longest = longest_language("rust", "typescript");
+    println!("longest language: {}", longest);
 }
