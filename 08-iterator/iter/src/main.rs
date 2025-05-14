@@ -30,6 +30,8 @@ fn explode(elements: &[String]) -> Vec<Vec<String>> {
         .collect::<Vec<_>>()
 }
 
+fn find_color_or(elements: &[String], search: &str, fallback: &str) -> String {}
+
 fn main() {
     let colors = vec![
         String::from("red"),
