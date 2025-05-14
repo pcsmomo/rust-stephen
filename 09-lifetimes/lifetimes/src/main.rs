@@ -1,4 +1,4 @@
-fn next_language(languages: &[String], current: &str) -> &str {
+fn next_language<'a>(languages: &'a [String], current: &str) -> &'a str {
     let mut found = false;
 
     for lang in languages {
@@ -22,7 +22,8 @@ fn main() {
         String::from("python"),
     ];
 
-    let next = next_language(&languages, "go");
+    let current = "go";
+    let next = next_language(&languages, current);
 
     println!("{}", next);
 }
