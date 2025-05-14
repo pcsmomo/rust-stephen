@@ -394,4 +394,12 @@ cargo new iter
 cd iter
 ```
 
+### 86. Iterator Consumers
+
+iterator is lazy. Nothing happens until...
+
+- A) You call `next`
+- B) You use a function that called `next` automatically
+  - consumers such as `for_each`, `collect`, `map`, etc
+
 </details>
