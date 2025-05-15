@@ -34,6 +34,7 @@ pub fn fill_gradient_radial(img: &mut RgbImage) {
     for y in 0..height {
         for x in 0..width {
             // Normalize coordinates to range [-1, 1] for symmetry
+            // ndc: normalized device coordinates
             let x_ndc = 2.0 * (x as f64 / (width - 1) as f64) - 1.0;
             let y_ndc = 2.0 * (y as f64 / (height - 1) as f64) - 1.0;
 

@@ -1,0 +1,35 @@
+use num::Float;
+
+#[derive(Debug)]
+pub struct Vector3<T> {
+    pub x: T,
+    pub y: T,
+    pub z: T,
+}
+
+impl<T: Float> Vector3<T> {
+    pub fn new(x: T, y: T, z: T) -> Self {
+        Vector3 { x, y, z }
+    }
+
+    pub fn length_squared(&self) -> T {
+        // We compute the sum of squares (x² + y² + z²) which is useful on its own
+        // and avoids the expensive square root operation when only comparing lengths
+        self.x * self.x + self.y * self.y + self.z * self.z
+    }
+
+    pub fn length(&self) -> T {
+        // We calculate the length using the Euclidean distance formula: √(x² + y² + z²)
+        // We separate this into two steps (square then sqrt) for two reasons:
+        // 1. It allows reuse of length_squared() which is useful on its own
+        // 2. Square root is computationally expensive, so we avoid it when possible
+        self.length_squared().sqrt()
+    }
+
+    pub fn normalize(&mut self) {
+        let length = self.length();
+        self.x = self.x / length;
+        self.y = self.y / length;
+        self.z = self.z / length;
+    }
+}

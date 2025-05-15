@@ -1,25 +1,62 @@
-mod process;
+mod vector3;
 
 use image::{Rgb, RgbImage};
 
-use process::fill_colors::{fill_gradient, fill_gradient_radial};
+// use vector3::Vector3;
+use crate::vector3::Vector3;
 
-fn fill_image_with_gradient() {
-    // constants
-    const RESULT_DIR: &str = "results";
-    const RESULT_FILE_NAME: &str = "image.png";
-    const IMAGE_WIDTH: u32 = 600;
-    const IMAGE_HEIGHT: u32 = 400;
-
-    let mut img = RgbImage::new(IMAGE_WIDTH, IMAGE_HEIGHT);
-
-    // fill_gradient(&mut img);
-    fill_gradient_radial(&mut img);
-
-    img.save(format!("{}/{}", RESULT_DIR, RESULT_FILE_NAME))
-        .unwrap();
+/// Linear interpolation between two values.
+///
+/// `lerp` calculates a value between `start` and `end` based on parameter `t`:
+/// - When t = 0.0, returns `start`
+/// - When t = 1.0, returns `end`
+/// - When 0.0 < t < 1.0, returns a proportional value between `start` and `end`
+///
+/// This is commonly used in graphics to blend between two values (colors, positions, etc.)
+/// based on a normalized parameter.
+pub fn lerp(start: f64, end: f64, t: f64) -> f64 {
+    (1.0 - t) * start + t * end
 }
 
 fn main() {
-    fill_image_with_gradient();
+    let image_width = 800;
+    let image_height = 600;
+    let aspect_ratio = image_width as f64 / image_height as f64;
+
+    let mut image = RgbImage::new(image_width, image_height);
+
+    for y in 0..image_height {
+        for x in 0..image_width {
+            let x_ndc = (x as f64 + 0.5) / (image_width - 1) as f64;
+            let y_ndc = (y as f64 + 0.5) / (image_height - 1) as f64;
+
+            let x_pixel_camera = (2.0 * x_ndc - 1.0) * aspect_ratio;
+            // let y_pixel_camera = (1.0 - 2.0 * y_ndc) * 1.0;
+            let y_pixel_camera = 1.0 - 2.0 * y_ndc;
+
+            let mut ray_direction = Vector3::new(x_pixel_camera, y_pixel_camera, -1.0);
+            ray_direction.normalize();
+
+            let t = 0.5 * (ray_direction.y + 1.0);
+
+            let r = (lerp(1.0, 0.5, t) * 255.0) as u8;
+            let g = (lerp(1.0, 0.7, t) * 255.0) as u8;
+            let b = 255;
+
+            // let r = (ray_direction.x * 255.0) as u8;
+            // let g = (ray_direction.y * 255.0) as u8;
+            // let b = (ray_direction.z * 255.0) as u8;
+
+            // let r = (x_ndc * 255.0) as u8;
+            // let g = (y_ndc * 255.0) as u8;
+            // let b = 0;
+
+            let color = Rgb([r, g, b]);
+            image.put_pixel(x, y, color);
+        }
+    }
+
+    image.save("results/image_ray.png").unwrap();
+
+    // println!("{:#?}", v3);
 }
