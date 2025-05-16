@@ -32,8 +32,9 @@ fn create_ray(image_width: u32, image_height: u32) -> RgbImage {
     // Calculate aspect ratio to maintain proper proportions
     let aspect_ratio = image_width as f64 / image_height as f64;
 
-    // Create a sphere centered at (0, 0, -1) with radius 0.25
-    let sphere = Sphere::new(Vector3::new(0.0, 0.0, -1.0), 0.25);
+    // Create a sphere
+    let sphere = Sphere::new(Vector3::new(-0.2, -0.2, -1.0), 0.15);
+    let sphere2 = Sphere::new(Vector3::new(0.2, 0.2, -1.0), 0.25);
 
     // Initialize the output image
     let mut image = RgbImage::new(image_width, image_height);
@@ -61,13 +62,18 @@ fn create_ray(image_width: u32, image_height: u32) -> RgbImage {
             let t = 0.5 * (ray.direction.y + 1.0);
 
             // Check for ray-sphere intersection
-            match sphere.hit(&ray) {
+            match sphere.hit(&ray).is_some() || sphere2.hit(&ray).is_some() {
                 // If ray hits sphere, color pixel red
-                Some(t) => {
-                    image.put_pixel(x, y, Rgb([255, 0, 0]));
+                true => {
+                    // change the color applying gradient
+                    let r = 255;
+                    let g = (lerp(1.0, 0.5, t) * 255.0) as u8;
+                    let b = (lerp(1.0, 0.7, t) * 255.0) as u8;
+                    let color = Rgb([r, g, b]);
+                    image.put_pixel(x, y, color);
                 }
                 // If ray misses sphere, create gradient background
-                None => {
+                false => {
                     // Interpolate colors for gradient effect
                     let r = (lerp(1.0, 0.5, t) * 255.0) as u8;
                     let g = (lerp(1.0, 0.7, t) * 255.0) as u8;
