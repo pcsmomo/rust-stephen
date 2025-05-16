@@ -32,13 +32,32 @@ fn create_ray(image_width: u32, image_height: u32) -> RgbImage {
     // Calculate aspect ratio to maintain proper proportions
     let aspect_ratio = image_width as f64 / image_height as f64;
 
-    // Create a sphere
+    // Create a fox using spheres
     let objects = vec![
-        Sphere::new(Vector3::new(0.0, 0.0, -1.0), 0.25),
-        Sphere::new(Vector3::new(-0.5, 0.5, -1.5), 0.15),
-        Sphere::new(Vector3::new(-0.4, -0.2, -1.5), 0.17),
-        Sphere::new(Vector3::new(0.3, 0.2, -1.0), 0.2),
-        Sphere::new(Vector3::new(0.5, -0.5, -1.2), 0.2),
+        // Head
+        Sphere::new(Vector3::new(0.0, 0.2, -1.0), 0.15),
+        // Snout
+        Sphere::new(Vector3::new(0.0, 0.1, -0.8), 0.08),
+        // Left ear
+        Sphere::new(Vector3::new(-0.1, 0.35, -1.0), 0.05),
+        // Right ear
+        Sphere::new(Vector3::new(0.1, 0.35, -1.0), 0.05),
+        // Left eye
+        Sphere::new(Vector3::new(-0.05, 0.25, -0.85), 0.02),
+        // Right eye
+        Sphere::new(Vector3::new(0.05, 0.25, -0.85), 0.02),
+        // Body
+        Sphere::new(Vector3::new(0.0, -0.1, -1.0), 0.2),
+        // Tail
+        Sphere::new(Vector3::new(0.2, -0.2, -1.0), 0.1),
+        // Left front leg
+        Sphere::new(Vector3::new(-0.1, -0.3, -1.0), 0.05),
+        // Right front leg
+        Sphere::new(Vector3::new(0.1, -0.3, -1.0), 0.05),
+        // Left back leg
+        Sphere::new(Vector3::new(-0.1, -0.4, -1.0), 0.05),
+        // Right back leg
+        Sphere::new(Vector3::new(0.1, -0.4, -1.0), 0.05),
     ];
 
     // let sphere = Sphere::new(Vector3::new(0.0, 0.0, -1.0), 0.5);
