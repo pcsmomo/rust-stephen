@@ -32,4 +32,20 @@ impl<T: Float> Vector3<T> {
         self.y = self.y / length;
         self.z = self.z / length;
     }
+
+    pub fn dot(&self, rhs: &Vector3<T>) -> T {
+        self.x * rhs.x + self.y * rhs.y + self.z * rhs.z
+    }
+
+    pub fn subtract(&self, rhs: &Vector3<T>) -> Vector3<T> {
+        Vector3::new(self.x - rhs.x, self.y - rhs.y, self.z - rhs.z)
+    }
+
+    pub fn add(&self, rhs: &Vector3<T>) -> Vector3<T> {
+        Vector3::new(self.x + rhs.x, self.y + rhs.y, self.z + rhs.z)
+    }
+
+    pub fn multiply(&self, value: T) -> Vector3<T> {
+        Vector3::new(self.x * value, self.y * value, self.z * value)
+    }
 }
