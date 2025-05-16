@@ -18,11 +18,8 @@ pub fn lerp(start: f64, end: f64, t: f64) -> f64 {
     (1.0 - t) * start + t * end
 }
 
-fn main() {
-    let image_width = 800;
-    let image_height = 600;
+fn create_ray_sky(image_width: u32, image_height: u32) -> RgbImage {
     let aspect_ratio = image_width as f64 / image_height as f64;
-
     let mut image = RgbImage::new(image_width, image_height);
 
     for y in 0..image_height {
@@ -31,7 +28,6 @@ fn main() {
             let y_ndc = (y as f64 + 0.5) / (image_height - 1) as f64;
 
             let x_pixel_camera = (2.0 * x_ndc - 1.0) * aspect_ratio;
-            // let y_pixel_camera = (1.0 - 2.0 * y_ndc) * 1.0;
             let y_pixel_camera = 1.0 - 2.0 * y_ndc;
 
             let mut ray_direction = Vector3::new(x_pixel_camera, y_pixel_camera, -1.0);
@@ -43,20 +39,18 @@ fn main() {
             let g = (lerp(1.0, 0.7, t) * 255.0) as u8;
             let b = 255;
 
-            // let r = (ray_direction.x * 255.0) as u8;
-            // let g = (ray_direction.y * 255.0) as u8;
-            // let b = (ray_direction.z * 255.0) as u8;
-
-            // let r = (x_ndc * 255.0) as u8;
-            // let g = (y_ndc * 255.0) as u8;
-            // let b = 0;
-
             let color = Rgb([r, g, b]);
             image.put_pixel(x, y, color);
         }
     }
 
-    image.save("results/image_ray.png").unwrap();
+    image
+}
 
-    // println!("{:#?}", v3);
+fn main() {
+    let image_width = 800;
+    let image_height = 600;
+    let image = create_ray_sky(image_width, image_height);
+
+    image.save("results/image_ray.png").unwrap();
 }

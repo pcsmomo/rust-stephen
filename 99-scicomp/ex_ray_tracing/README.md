@@ -6,3 +6,5 @@
 cargo new ex_ray_tracing
 cargo add image
 ```
+
+## Formular
