@@ -6,17 +6,16 @@ use image::{Rgb, RgbImage};
 
 /// Represents a simple camera with a configurable field of view.
 pub struct Camera {
-    pub field_of_view: f64, // Field of view in degrees
+    field_of_view_factor: f64,
 }
 
 impl Camera {
     /// Constructs a new Camera with the given field of view (in degrees).
     pub fn new(field_of_view: f64) -> Self {
-        Camera { field_of_view }
-    }
-
-    fn get_field_of_view_factor(&self) -> f64 {
-        (self.field_of_view.to_radians() / 2.0).tan()
+        Camera {
+            // Convert field of view to a scaling factor for the image plane
+            field_of_view_factor: (field_of_view.to_radians() / 2.0).tan(),
+        }
     }
 
     /// Linear interpolation between two values.
@@ -32,7 +31,7 @@ impl Camera {
         (1.0 - t) * start + t * end
     }
 
-    fn trace_ray(&self, ray: Ray, objects: &Vec<Sphere>) -> Rgb<u8> {
+    fn trace_ray_noah(&self, ray: Ray, objects: &Vec<Sphere>) -> Rgb<u8> {
         let mut closest_t: Option<f64> = None;
         let mut closest_object: Option<&Sphere> = None;
 
@@ -61,7 +60,7 @@ impl Camera {
                 Rgb([r, g, b])
             }
             None => {
-                let t = 0.5 * (ray.direction.y / self.get_field_of_view_factor() + 1.0);
+                let t = 0.5 * (ray.direction.y / self.field_of_view_factor + 1.0);
                 let r = (self.lerp(1.0, 0.5, t) * 255.0) as u8;
                 let g = 255;
                 let b = (self.lerp(1.0, 0.3, t) * 255.0) as u8;
@@ -87,9 +86,6 @@ impl Camera {
         // Calculate aspect ratio to maintain proper proportions
         let aspect_ratio = image_width as f64 / image_height as f64;
 
-        // Convert field of view to a scaling factor for the image plane
-        let field_of_view_factor = self.get_field_of_view_factor();
-
         // Iterate through each pixel in the image
         for y in 0..image_height {
             for x in 0..image_width {
@@ -100,8 +96,8 @@ impl Camera {
 
                 // Convert NDC to camera space coordinates
                 // Scale x by aspect ratio and field of view to prevent distortion
-                let x_pixel_camera = (2.0 * x_ndc - 1.0) * aspect_ratio * field_of_view_factor;
-                let y_pixel_camera = (1.0 - 2.0 * y_ndc) * field_of_view_factor;
+                let x_pixel_camera = (2.0 * x_ndc - 1.0) * aspect_ratio * self.field_of_view_factor;
+                let y_pixel_camera = (1.0 - 2.0 * y_ndc) * self.field_of_view_factor;
 
                 // Create a ray from the camera origin (0,0,0) through the pixel
                 let ray = Ray::new(
@@ -109,7 +105,7 @@ impl Camera {
                     Vector3::new(x_pixel_camera, y_pixel_camera, -1.0), // Ray direction (z = -1)
                 );
 
-                let color = self.trace_ray(ray, objects);
+                let color = self.trace_ray_noah(ray, objects);
                 image.put_pixel(x, y, color);
             }
         }
