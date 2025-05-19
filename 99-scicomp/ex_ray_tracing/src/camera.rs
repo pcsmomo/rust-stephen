@@ -110,9 +110,15 @@ impl Camera {
             None => {
                 let t = 0.5 * (ray.direction.y / self.field_of_view_factor + 1.0);
 
+                // purple
+                // let x = self.lerp(1.0, 0.5, t);
+                // let y = self.lerp(1.0, 0.3, t);
+                // let z = 1.0;
+
+                // green
                 let x = self.lerp(1.0, 0.5, t);
-                let y = self.lerp(1.0, 0.3, t);
-                let z = 1.0;
+                let y = 1.0;
+                let z = self.lerp(1.0, 0.3, t);
 
                 Vector3::new(x, y, z)
             }

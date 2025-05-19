@@ -10,6 +10,7 @@ use image::RgbImage;
 
 use crate::camera::Camera;
 use crate::objects::fox;
+use crate::objects::symmetric;
 
 fn main() {
     // Image dimensions and camera field of view
@@ -22,7 +23,7 @@ fn main() {
     let camera = Camera::new(field_of_view as f64, max_bounce);
     let mut image = RgbImage::new(image_width, image_height);
 
-    let objects = fox::get_fox_objects();
+    let objects = symmetric::get_symmetric_objects();
 
     // Render the scene from the camera's perspective
     camera.render(&mut image, &objects);
