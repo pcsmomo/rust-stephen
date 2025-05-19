@@ -69,6 +69,52 @@ impl Camera {
         }
     }
 
+    fn trace_ray(&self, ray: Ray, objects: &Vec<Sphere>) -> Vector3<f64> {
+        let mut closest_t: Option<f64> = None;
+        let mut closest_object: Option<&Sphere> = None;
+
+        for object in objects.iter() {
+            match object.hit(&ray) {
+                Some(t) => {
+                    if closest_t.is_none() || t < closest_t.unwrap_or(10000000.0) {
+                        closest_t = Some(t);
+                        closest_object = Some(object);
+                    }
+                }
+                None => {}
+            }
+        }
+
+        match closest_object {
+            Some(object) => {
+                let hit_point = ray.at(closest_t.unwrap());
+                let mut normal = hit_point.subtract(&object.center);
+                normal.normalize();
+
+                let brightness = 0.7;
+
+                Vector3::new(
+                    (normal.x + 1.0) * brightness,
+                    (normal.y + 1.0) * brightness,
+                    (normal.z + 1.0) * brightness,
+                )
+            }
+            None => {
+                let t = 0.5 * (ray.direction.y / self.field_of_view_factor + 1.0);
+
+                // let x = self.lerp(1.0, 0.5, t);
+                // let y = self.lerp(1.0, 0.3, t);
+                // let z = 255.0;
+
+                let x = self.lerp(1.0, 0.5, t);
+                let y = self.lerp(1.0, 0.3, t);
+                let z = 1.0;
+
+                Vector3::new(x, y, z)
+            }
+        }
+    }
+
     /// Renders a ray-traced image of the scene with spheres and a gradient background.
     ///
     /// # Arguments
@@ -105,8 +151,16 @@ impl Camera {
                     Vector3::new(x_pixel_camera, y_pixel_camera, -1.0), // Ray direction (z = -1)
                 );
 
-                let color = self.trace_ray_noah(ray, objects);
-                image.put_pixel(x, y, color);
+                // Original working code
+                // let color = self.trace_ray_noah(ray, objects);
+                // image.put_pixel(x, y, color);
+
+                // New with nested ray tracing
+                let v3 = self.trace_ray(ray, objects);
+                let r = (v3.x * 255.0) as u8;
+                let g = (v3.y * 255.0) as u8;
+                let b = (v3.z * 255.0) as u8;
+                image.put_pixel(x, y, Rgb([r, g, b]));
             }
         }
         // The rendered image is written in-place to the provided buffer
