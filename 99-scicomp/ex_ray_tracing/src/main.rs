@@ -1,5 +1,6 @@
 //! Simple ray tracer rendering a fox using spheres
 mod camera;
+mod material;
 mod objects;
 mod ray;
 mod sphere;

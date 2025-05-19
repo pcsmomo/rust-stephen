@@ -1,3 +1,4 @@
+use crate::material::Material;
 use crate::ray::Ray;
 use crate::vector3::Vector3;
 
@@ -5,11 +6,16 @@ use crate::vector3::Vector3;
 pub struct Sphere {
     pub center: Vector3<f64>,
     pub radius: f64,
+    pub material: Material,
 }
 
 impl Sphere {
-    pub fn new(center: Vector3<f64>, radius: f64) -> Self {
-        Sphere { center, radius }
+    pub fn new(center: Vector3<f64>, radius: f64, material: Material) -> Self {
+        Sphere {
+            center,
+            radius,
+            material,
+        }
     }
 
     pub fn hit(&self, ray: &Ray) -> Option<f64> {

@@ -99,20 +99,13 @@ impl Camera {
                 let mut normal = hit_point.subtract(&object.center);
                 normal.normalize();
 
-                // New ray here!
-                let next_direction = Vector3::random_on_hemisphere(&normal);
-
-                let new_ray_origin = Vector3::new(
-                    hit_point.x + normal.x * 0.00000001,
-                    hit_point.y + normal.y * 0.00000001,
-                    hit_point.z + normal.z * 0.00000001,
-                );
-
-                let new_ray = Ray::new(new_ray_origin, next_direction);
-
-                let color = self.trace_ray(new_ray, bounce_count + 1, objects);
-
-                Vector3::new(0.5 * color.x, 0.5 * color.y, 0.5 * color.z)
+                match object.material.scatter(ray.clone(), &hit_point, &normal) {
+                    Some((scattered_ray, albedo)) => {
+                        let color = self.trace_ray(scattered_ray, bounce_count + 1, objects);
+                        Vector3::new(0.5 * color.x, 0.5 * color.y, 0.5 * color.z)
+                    }
+                    None => Vector3::new(0.0, 0.0, 0.0),
+                }
             }
             None => {
                 let t = 0.5 * (ray.direction.y / self.field_of_view_factor + 1.0);

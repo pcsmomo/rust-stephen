@@ -1,8 +1,9 @@
 use num::Float;
+
 use rand_distr::uniform::SampleUniform;
 use rand_distr::{Distribution, UnitSphere};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Vector3<T> {
     pub x: T,
     pub y: T,
@@ -49,6 +50,11 @@ impl<T: Float> Vector3<T> {
 
     pub fn multiply(&self, value: T) -> Vector3<T> {
         Vector3::new(self.x * value, self.y * value, self.z * value)
+    }
+
+    pub fn reflect(&self, normal: &Vector3<T>) -> Vector3<T> {
+        let dot_product = self.dot(normal);
+        self.subtract(&normal.multiply(dot_product * T::from(2.0).unwrap()))
     }
 }
 
