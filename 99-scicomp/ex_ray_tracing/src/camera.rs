@@ -1,5 +1,4 @@
 // Camera module: Implements a simple pinhole camera for ray tracing
-use crate::lerp::lerp;
 use crate::ray::Ray;
 use crate::sphere::Sphere;
 use crate::vector3::Vector3;
@@ -14,6 +13,19 @@ impl Camera {
     /// Constructs a new Camera with the given field of view (in degrees).
     pub fn new(field_of_view: f64) -> Self {
         Camera { field_of_view }
+    }
+
+    /// Linear interpolation between two values.
+    ///
+    /// `lerp` calculates a value between `start` and `end` based on parameter `t`:
+    /// - When t = 0.0, returns `start`
+    /// - When t = 1.0, returns `end`
+    /// - When 0.0 < t < 1.0, returns a proportional value between `start` and `end`
+    ///
+    /// This is commonly used in graphics to blend between two values (colors, positions, etc.)
+    /// based on a normalized parameter.
+    pub fn lerp(&self, start: f64, end: f64, t: f64) -> f64 {
+        (1.0 - t) * start + t * end
     }
 
     /// Renders a ray-traced image of the scene with spheres and a gradient background.
@@ -95,9 +107,9 @@ impl Camera {
                         let t = 0.5 * (ray.direction.y / field_of_view_factor + 1.0);
 
                         // Interpolate between two colors for the gradient
-                        let r = (lerp(1.0, 0.5, t) * 255.0) as u8; // From white to light blue
+                        let r = (self.lerp(1.0, 0.5, t) * 255.0) as u8; // From white to light blue
                         let g = 255;
-                        let b = (lerp(1.0, 0.3, t) * 255.0) as u8; // From white to blue
+                        let b = (self.lerp(1.0, 0.3, t) * 255.0) as u8; // From white to blue
 
                         let color = Rgb([r, g, b]);
                         image.put_pixel(x, y, color);

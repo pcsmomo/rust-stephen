@@ -1,6 +1,5 @@
 //! Simple ray tracer rendering a fox using spheres
 mod camera;
-mod lerp;
 mod ray;
 mod sphere;
 mod vector3;
