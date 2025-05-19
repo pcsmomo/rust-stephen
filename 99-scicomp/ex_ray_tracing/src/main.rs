@@ -15,9 +15,10 @@ fn main() {
     let image_width = 800;
     let image_height = 600;
     let field_of_view = 45;
+    let max_bounce: u8 = 10;
 
     // Initialize camera with the specified field of view
-    let camera = Camera::new(field_of_view as f64);
+    let camera = Camera::new(field_of_view as f64, max_bounce);
     let mut image = RgbImage::new(image_width, image_height);
 
     let objects = fox::get_fox_objects();

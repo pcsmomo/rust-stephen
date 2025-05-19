@@ -6,13 +6,15 @@ use image::{Rgb, RgbImage};
 
 /// Represents a simple camera with a configurable field of view.
 pub struct Camera {
+    max_bounce: u8,
     field_of_view_factor: f64,
 }
 
 impl Camera {
     /// Constructs a new Camera with the given field of view (in degrees).
-    pub fn new(field_of_view: f64) -> Self {
+    pub fn new(field_of_view: f64, max_bounce: u8) -> Self {
         Camera {
+            max_bounce,
             // Convert field of view to a scaling factor for the image plane
             field_of_view_factor: (field_of_view.to_radians() / 2.0).tan(),
         }
@@ -69,14 +71,19 @@ impl Camera {
         }
     }
 
-    fn trace_ray(&self, ray: Ray, objects: &Vec<Sphere>) -> Vector3<f64> {
+    fn trace_ray(&self, ray: Ray, bounce_count: u8, objects: &Vec<Sphere>) -> Vector3<f64> {
+        if bounce_count > self.max_bounce {
+            return Vector3::new(0.0, 0.0, 0.0);
+        }
+
         let mut closest_t: Option<f64> = None;
         let mut closest_object: Option<&Sphere> = None;
 
         for object in objects.iter() {
             match object.hit(&ray) {
                 Some(t) => {
-                    if closest_t.is_none() || t < closest_t.unwrap_or(10000000.0) {
+                    // if (t > 0.00000001) && (t < closest_t.unwrap_or(10000000.0)) {
+                    if (t > 0.0) && (t < closest_t.unwrap_or(10000000.0)) {
                         closest_t = Some(t);
                         closest_object = Some(object);
                     }
@@ -87,24 +94,28 @@ impl Camera {
 
         match closest_object {
             Some(object) => {
+                // Hit the object
                 let hit_point = ray.at(closest_t.unwrap());
                 let mut normal = hit_point.subtract(&object.center);
                 normal.normalize();
 
-                let brightness = 0.7;
+                // New ray here!
+                let next_direction = Vector3::random_on_hemisphere(&normal);
 
-                Vector3::new(
-                    (normal.x + 1.0) * brightness,
-                    (normal.y + 1.0) * brightness,
-                    (normal.z + 1.0) * brightness,
-                )
+                let new_ray_origin = Vector3::new(
+                    hit_point.x + normal.x * 0.00000001,
+                    hit_point.y + normal.y * 0.00000001,
+                    hit_point.z + normal.z * 0.00000001,
+                );
+
+                let new_ray = Ray::new(new_ray_origin, next_direction);
+
+                let color = self.trace_ray(new_ray, bounce_count + 1, objects);
+
+                Vector3::new(0.5 * color.x, 0.5 * color.y, 0.5 * color.z)
             }
             None => {
                 let t = 0.5 * (ray.direction.y / self.field_of_view_factor + 1.0);
-
-                // let x = self.lerp(1.0, 0.5, t);
-                // let y = self.lerp(1.0, 0.3, t);
-                // let z = 255.0;
 
                 let x = self.lerp(1.0, 0.5, t);
                 let y = self.lerp(1.0, 0.3, t);
@@ -156,10 +167,15 @@ impl Camera {
                 // image.put_pixel(x, y, color);
 
                 // New with nested ray tracing
-                let v3 = self.trace_ray(ray, objects);
+                let v3 = self.trace_ray(ray, 0, objects);
                 let r = (v3.x * 255.0) as u8;
                 let g = (v3.y * 255.0) as u8;
                 let b = (v3.z * 255.0) as u8;
+
+                // println!(
+                //     "v3.x: {}, v3.y: {}, v3.z: {} \n R: {}, G: {}, B: {}",
+                //     v3.x, v3.y, v3.z, r, g, b
+                // );
                 image.put_pixel(x, y, Rgb([r, g, b]));
             }
         }

@@ -1,4 +1,6 @@
 use num::Float;
+use rand_distr::uniform::SampleUniform;
+use rand_distr::{Distribution, UnitSphere};
 
 #[derive(Debug)]
 pub struct Vector3<T> {
@@ -47,5 +49,22 @@ impl<T: Float> Vector3<T> {
 
     pub fn multiply(&self, value: T) -> Vector3<T> {
         Vector3::new(self.x * value, self.y * value, self.z * value)
+    }
+}
+
+impl<T: Float + SampleUniform> Vector3<T> {
+    pub fn random_unit_sphere() -> Self {
+        let v: [T; 3] = UnitSphere.sample(&mut rand::rng());
+        Vector3::new(v[0], v[1], v[2])
+    }
+
+    pub fn random_on_hemisphere(normal: &Vector3<T>) -> Self {
+        let vec_on_sphere = Self::random_unit_sphere();
+
+        if vec_on_sphere.dot(normal).is_sign_positive() {
+            vec_on_sphere
+        } else {
+            Vector3::new(-vec_on_sphere.x, -vec_on_sphere.y, -vec_on_sphere.z)
+        }
     }
 }
