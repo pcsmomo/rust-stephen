@@ -139,10 +139,13 @@ fn create_ray(image_width: u32, image_height: u32, field_of_view: f64) -> RgbIma
 fn main() {
     let image_width = 800;
     let image_height = 600;
-    let field_of_view = 45;
 
-    let image = create_ray(image_width, image_height, field_of_view as f64);
-    let filename = format!("results/fov/frame_{:03}.png", field_of_view);
-    image.save(&filename).unwrap();
-    println!("Saved {}", filename);
+    for fov in 1..=90 {
+        let image = create_ray(image_width, image_height, fov as f64);
+        let filename = format!("results/fov/frame_{:03}.png", fov);
+        image.save(&filename).unwrap();
+        println!("Saved {}", filename);
+    }
 }
+
+// ffmpeg -framerate 30 -i results/fov/frame_%03d.png -c:v libx264 -pix_fmt yuv420p results/fov/animation.mp4
